@@ -1,4 +1,3 @@
-import { HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
@@ -8,15 +7,15 @@ export const routes: Routes = [
     loadChildren: () => import('./auth/auth.module').then((m) => m.AuthModule),
   },
   {
+    path: 'product',
+    loadChildren: () =>
+      import('./product/product.module').then((m) => m.ProductModule),
+  },
+  {
     path: '**',
     redirectTo: 'auth',
   },
-  /*
-  {
-    path: 'register',
-    loadChildren: () =>
-      import('./product/product.module').then((m) => m.ProductModule),
-  },*/
+
 ];
 
 @NgModule({

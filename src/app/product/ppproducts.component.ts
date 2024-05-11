@@ -1,5 +1,4 @@
-import { Component, OnInit } from '@angular/core';
-import { ProductService } from './product.service';
+/*import { Component, OnInit } from '@angular/core';
 import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
 import { Product } from './product.model';
 
@@ -58,3 +57,4 @@ export class ProductsComponent implements OnInit {
     );
   }
 }
+*/

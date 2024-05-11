@@ -1,17 +1,15 @@
 import { RouterModule, Routes } from '@angular/router';
 import { NgModule } from '@angular/core';
-import { ListProductComponent } from './pages/login/login.component';
-import { RegisterComponent } from './pages/register/register.component';
-import { ForgetComponent } from './pages/forget/forget.component';
+import { ListComponent } from './pages/list/list.component';
+import { EditComponent } from './pages/edit/edit.component';
 
-const routes: Routes = [
+export const routes: Routes = [
   {
     path: '',
     children: [
-      { path: 'login', component: LoginComponent },
-      { path: 'register', component: RegisterComponent },
-      { path: 'forgot', component: ForgetComponent },
-      { path: '**', redirectTo: 'login' },
+      { path: 'list', component: ListComponent },
+      { path: 'edit', component: EditComponent },
+      { path: '**', redirectTo: 'list' },
     ],
   },
 ];
@@ -19,4 +17,4 @@ const routes: Routes = [
 @NgModule({
   imports: [RouterModule.forChild(routes)],
 })
-export class AuthRoutingModule {}
+export class ProductsRoutingModule {}

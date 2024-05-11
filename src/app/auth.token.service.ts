@@ -1,3 +1,4 @@
+import { HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 
 @Injectable({
@@ -22,5 +23,9 @@ export class AuthTokenService {
 
   removeToken(): void {
     localStorage.removeItem('token');
+  }
+
+  getTokenHeader(): HttpHeaders {
+    return new HttpHeaders().set('Authorization', `Bearer ${this.getToken()}`);
   }
 }
