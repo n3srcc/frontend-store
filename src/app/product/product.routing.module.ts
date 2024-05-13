@@ -9,6 +9,7 @@ export const routes: Routes = [
     children: [
       { path: 'list', component: ListComponent },
       { path: 'edit/:id', component: EditComponent },
+      { path: 'create', component: EditComponent },
       { path: '**', redirectTo: 'list' },
     ],
   },

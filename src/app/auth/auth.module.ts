@@ -6,7 +6,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { AuthTokenService } from '../auth.token.service';
 import { RegisterComponent } from './pages/register/register.component';
-import { ForgetComponent } from './pages/forget/ForgetComponent';
+import { ForgetComponent } from './pages/forget/forget.component';
 import { ResetPasswordComponent } from './pages/reset-password/reset.password.component';
 
 @NgModule({

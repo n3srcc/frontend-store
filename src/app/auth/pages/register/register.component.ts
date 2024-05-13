@@ -30,8 +30,7 @@ export class RegisterComponent {
         .subscribe(
           (response) => {
             this.errorMessage = null;
-            this.successMessage = response.message || 'Registro exitoso';
-            console.log('Respuesta exitosa:', response);
+            this.successMessage = response?.message || 'Registro exitoso';
             setTimeout(() => {
               this.successMessage = null;
             }, 6000);
@@ -42,7 +41,8 @@ export class RegisterComponent {
             setTimeout(() => {
               this.errorMessage = null;
             }, 6000);
-          }
+
+          },
         );
     } else {
       // Manejar el caso en que el formulario no sea válido

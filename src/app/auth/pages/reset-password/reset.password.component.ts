@@ -17,8 +17,8 @@ export class ResetPasswordComponent {
 
   constructor(
     private router: Router,
-    private http: HttpClient,
     private authTokenService: AuthTokenService,
+    private http: HttpClient,
     private formBuilder: FormBuilder,
     private route: ActivatedRoute
   ) {

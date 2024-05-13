@@ -1,8 +1,6 @@
 import { SafeHtml } from "@angular/platform-browser";
 
 export interface Product {
-  id: number;
-  handle: string;
   title: string;
   description: any;
   sku: string;
@@ -11,6 +9,4 @@ export interface Product {
   price: number;
   compare_price: number;
   barcode: string;
-  createdAt: string;
-  updatedAt: string;
 }

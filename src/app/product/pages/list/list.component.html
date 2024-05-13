@@ -1,45 +1,108 @@
-<div class="container">
-  <h2>Lista de productos</h2>
-  <table class="table">
+<div class="container my-5">
+  <div class="row mb-3">
+    <div class="col">
+      <h2>Lista de productos</h2>
+    </div>
+    <div class="col-auto">
+      <a class="btn btn-primary me-2" href="/admin/product/create">Crear producto</a>
+      <button class="btn btn-primary" (click)="importProducts()">Importar Productos (xls)</button>
+    </div>
+  </div>
+  <table class="table my-5">
     <thead>
       <tr>
         <th>ID</th>
         <th>Nombre</th>
         <th>Descripción</th>
         <th>Precio</th>
+        <th>Precio Comparacion</th>
+        <th>Stock</th>
+        <th>Sku</th>
+        <th>Gramos</th>
+        <th>Codigo Barras</th>
         <th>Acciones</th>
       </tr>
     </thead>
     <tbody>
-      <tr
-        *ngFor="
-          let product of products
-            | paginate
-              : {
-                  itemsPerPage: pageSize,
-                  currentPage: currentPage,
-                  totalItems: pagination.totalCount
-                }
-        "
-      >
+      <tr *ngFor="let product of products | paginate: { itemsPerPage: pageSize, currentPage: currentPage, totalItems: totalCount }">
         <td>{{ product.id }}</td>
         <td>{{ product.title }}</td>
         <td>
           <div>{{ product.description }}</div>
         </td>
-        <td>{{ product.price }}</td>
+        <td> <div>{{ product.precio }}</div> </td>
+        <td> <div>{{ product.compare_price }}</div> </td>
+        <td> <div>{{ product.stock }}</div> </td>
+        <td> <div>{{ product.sku }}</div> </td>
+        <td> <div>{{ product.grams }}</div> </td>
+        <td> <div>{{ product.barcode }}</div> </td>
         <td>
-
-          <!-- <button class="btn btn-primary" (click)="editProduct(product.id)">
-            Editar
-          </button>
-          <button class="btn btn-danger" (click)="deleteProduct(product.id)">
-            Eliminar
-          </button> -->
+          <div class="d-flex flex-column">
+            <button class="btn btn-primary mb-2 w-100" (click)="editProduct(product.id)" >
+              Editar
+            </button>
+            <button class="btn btn-danger w-100" (click)="askConfirmDelete(product.id)">
+              Eliminar
+            </button>
+          </div>
         </td>
       </tr>
     </tbody>
   </table>
-</div>
+  <div class="row justify-content-center">
+    <div class="text-center">
+      <pagination-controls
+        (pageChange)="onPageChange($event)"
+        [responsive]="true"
+        previousLabel="Anterior"
+        nextLabel="Siguiente"
+      ></pagination-controls>
+    </div>
+  </div>
 
-<pagination-controls (pageChange)="currentPage = $event"></pagination-controls>
+  <div class="modal" tabindex="-1" role="dialog" id="confirmationModal">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Confirmación</h5>
+        </div>
+        <div class="modal-body">
+          ¿Estás seguro de que deseas eliminar este elemento con el ID <span class="font-weight-bold">{{ deleteProductId }}</span>?
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" (click)="closeModal()">Cancelar</button>
+          <button type="button" class="btn btn-danger" (click)="deleteProduct()">Eliminar</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal" tabindex="-1" role="dialog" id="importProductModal">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <form #importForm="ngForm" (submit)="submitImportForm(importForm)" enctype="multipart/form-data">
+          <div class="modal-header">
+            <h5 class="modal-title">Importar Productos (xls)</h5>
+          </div>
+          <div class="modal-body">
+            <div class="mb-3">
+              <div *ngIf="errorMessage" class="alert alert-danger">{{ errorMessage }}</div>
+              <div *ngIf="successMessage" class="alert alert-success">{{ successMessage }}</div>
+              <label for="fileInput" class="form-label">Selecciona un archivo XLS:</label>
+              <input type="file" class="form-control" id="fileInput" (change)="onFileSelected($event)" accept=".xls,.xlsx" [(ngModel)]="file" name="file" required #fileInput="ngModel">
+              <div *ngIf="fileInput.invalid && (fileInput.dirty || fileInput.touched)" class="text-danger">
+                <div *ngIf="fileInput?.errors?.['required']">Debes seleccionar un archivo.</div>
+              </div>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" (click)="closeModal()">Cancelar</button>
+            <button type="submit" class="btn btn-primary">Importar</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+
+</div>
