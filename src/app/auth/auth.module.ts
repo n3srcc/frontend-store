@@ -6,9 +6,11 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { AuthTokenService } from '../auth.token.service';
 import { RegisterComponent } from './pages/register/register.component';
+import { ForgetComponent } from './pages/forget/ForgetComponent';
+import { ResetPasswordComponent } from './pages/reset-password/reset.password.component';
 
 @NgModule({
-  declarations: [LoginComponent, RegisterComponent],
+  declarations: [LoginComponent, RegisterComponent, ForgetComponent, ResetPasswordComponent],
   imports: [
     CommonModule,
     FormsModule,

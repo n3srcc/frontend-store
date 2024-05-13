@@ -2,7 +2,7 @@
   <div class="row justify-content-center">
     <div class="col-lg-3 col-md-5 col-sm-10">
       <h2 class="text-center">Iniciar sesión</h2>
-      <form (ngSubmit)="login()" [formGroup]="loginForm" class="my-3">
+      <form (ngSubmit)="login()" [formGroup]="loginForm" class="my-5">
         <div class="form-group">
           <label for="username">Nombre de usuario:</label>
           <input type="text" class="form-control" id="username" formControlName="username" required>
@@ -16,6 +16,9 @@
           <div *ngIf="loginForm.get('password')!.touched && loginForm.invalid" class="text-danger">
             La contraseña es requerida.
           </div>
+        </div>
+        <div class="form-group">
+          <a routerLink="/auth/forgot">¿Olvidaste tu contraseña?</a>
         </div>
         <div class="form-group my-3">
           <button type="submit" class="btn btn-primary btn-block w-100" [disabled]="loginForm.invalid">Iniciar sesión</button>

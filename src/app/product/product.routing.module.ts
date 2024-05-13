@@ -8,7 +8,7 @@ export const routes: Routes = [
     path: '',
     children: [
       { path: 'list', component: ListComponent },
-      { path: 'edit', component: EditComponent },
+      { path: 'edit/:id', component: EditComponent },
       { path: '**', redirectTo: 'list' },
     ],
   },

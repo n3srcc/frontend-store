@@ -1,1 +1,22 @@
-forget
+<div class="container my-5">
+  <div class="row justify-content-center">
+    <div class="col-lg-3 col-md-5 col-sm-10">
+      <h2 class="text-center">Recuperación de contraseña</h2>
+      <form (ngSubmit)="recovery()" [formGroup]="recoveryForm" class="my-5">
+        <div class="form-group">
+          <label for="username">Nombre de usuario:</label>
+          <input type="text" class="form-control" id="username" formControlName="username" required>
+          <div *ngIf="recoveryForm.get('username')!.touched && recoveryForm.invalid" class="text-danger">
+            El nombre de usuario es requerido.
+          </div>
+        </div>
+        <div class="form-group my-3">
+          <button type="submit" class="btn btn-primary btn-block w-100" [disabled]="recoveryForm.invalid">Continuar</button>
+        </div>
+      </form>
+      <div *ngIf="errorMessage" class="alert alert-danger">{{ errorMessage }}</div>
+      <div *ngIf="recoveryLink" class="alert alert-success">Para restablecer tu contraseña ingresa al siguiente enlace <a [routerLink]="recoveryLink" class="font-weight-bold">Restablecer Contraseña</a>
+        <br/> <span class="font-italic">Nota. El enlace expirá en una hora.</span>  </div>
+    </div>
+  </div>
+</div>
