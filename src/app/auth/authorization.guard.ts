@@ -5,23 +5,28 @@ import {
   Router,
   RouterStateSnapshot,
 } from '@angular/router';
-import { AuthService } from './auth.service';
+import { AuthTokenService } from '../auth.token.service';
+import { JwtHelperService } from '@auth0/angular-jwt';
 
 @Injectable({
   providedIn: 'root',
 })
 class AuthorizationGuard {
-  constructor(private router: Router, private authService: AuthService) {}
+  constructor(
+    private router: Router,
+    private authTokenService: AuthTokenService,
+    private jwtHelper: JwtHelperService
+  ) {}
 
   canActivate(
     next: ActivatedRouteSnapshot,
     state: RouterStateSnapshot
   ): boolean {
-    /*if (!this.authService.getToken()) {
-      this.router.navigate(['/login']);
-      return false;
-    }*/
-    return true;
+      if (this.jwtHelper.isTokenExpired(this.authTokenService.getToken())) {
+        return false;
+      } else {
+        return true;
+      }
   }
 }
 
