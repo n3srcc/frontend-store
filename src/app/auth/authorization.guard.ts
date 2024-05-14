@@ -23,6 +23,7 @@ class AuthorizationGuard {
     state: RouterStateSnapshot
   ): boolean {
       if (this.jwtHelper.isTokenExpired(this.authTokenService.getToken())) {
+        this.router.navigate(['auth/login']);
         return false;
       } else {
         return true;

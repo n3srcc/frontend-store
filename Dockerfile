@@ -1,4 +1,4 @@
-FROM node:lts-slim
+FROM node:20.13.1-slim AS build
 
 WORKDIR /usr/src/app
 
@@ -8,6 +8,12 @@ RUN npm install
 
 COPY . .
 
-EXPOSE 8000
+RUN npm run build --prod
 
-CMD ["npm", "start"]
+FROM nginx:alpine
+
+COPY --from=build /usr/src/app/dist/frontend-store/browser /usr/share/nginx/html
+
+COPY nginx.conf /etc/nginx/conf.d/default.conf
+
+EXPOSE 80

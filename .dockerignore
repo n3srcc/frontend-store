@@ -1,0 +1,7 @@
+node_modules
+nginx.conf
+.git
+dist
+.vscode
+.angular
+.editorconfig
